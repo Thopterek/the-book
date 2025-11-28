@@ -7,6 +7,15 @@ use std::io;
  * std -> standard library
  * io <- input / output
 */
+use rand::Rng;
+/*
+ * above line added through Cargo.toml dependency
+ * run -> cargo build to get the dependency
+ * you can explicitly update through changing the version
+ * or command -> cargo update
+ * to be reproduced with same one you use Cargo.lock
+ */
+use std::cmp::Ordering;
 
 fn main() {
     println!("Guest the number!\nPlease input your guess.");
@@ -35,5 +44,17 @@ fn main() {
          * return (23) == Result Err
         */
         .expect("Error: Failed to read line.");
+    // particular number generator -> current thread
+    // passing the range of generated numbers to method
+    // cargo doc --open -> to show methods and functions of dependencies
+    let secret_number = rand::thread_rng().gen_range(1..=100);
+    match guess.cmp(&secret_number) {
+        // Ordering is another enum variant
+        // cmp is a method to compare with referenced value
+        Ordering::Less => println!("Too small!"),
+        Ordering::Greater => println!("Too big!"),
+        Ordering::Equal => println!("You win!"),
+    }
+    println!("Secret number is -> {secret_number}");
     println!("You guessed: {guess}");
 }
