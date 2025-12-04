@@ -60,7 +60,7 @@ fn main() {
      * Floating point numbers are always signed
      * base one is f64 but there is also f32
      * same C++ standard IEEE754
-     * division truncates toward zero
+     * division truncates towards zero
     */
     let x = 2.0;
     let y: f32 = 3.1;
