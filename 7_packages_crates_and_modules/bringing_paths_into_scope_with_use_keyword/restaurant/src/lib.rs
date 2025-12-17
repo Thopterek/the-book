@@ -43,6 +43,29 @@ mod front_of_house {
     }
 }
 
+// simplify the path needed to be taken
+// working only in the scope its present in
+// it won't apply to another mod even defined here
+use crate::front_of_house::hosting;
+
+// different when bringing two items with same name
+use std::fmt;
+use std::io;
+// then calling fmt::Result or io::Result<()> making it explicit
+// rather than bringing in use::std::fmt::Result and the other one
+// you can also bring them as other names to handle it
+use std::fmt::Result;
+// adding pub in front to allow for re exporting
+pub use std::io::Result as IoResult;
+// bringing things from the same crate / module you can use nested path
+// rather than use std::cmp::Ordering and use::std::io
+use std::{cmp::Ordering, io};
+// or using something like self for two verison of use in one statement
+use std::io::{self, Write};
+// if bringing everything we should use glob operator *
+// mostly just used for testing module
+use std::collections::*;
+
 // using super as a way to reference something in parent module
 fn deliver_order() {}
 
@@ -79,7 +102,9 @@ pub fn eat_at_restaurant() {
     let order = back_of_house::Appetize::Soup;
     // absolute path
     crate::front_of_house::hosting::add_to_waitlist();
-    // relative path
-    front_of_house::hosting::add_to_waitlist();
+    // relative path, replaced the below one thanks to use
+    // front_of_house::hosting::add_to_waitlist();
+    // keeping hosting to see where its defined
+    hosting::add_to_waitlist();
 }
 
