@@ -27,4 +27,5 @@ creating a shortuc to items to shorten path (namespace like?)
 * but if you used use ^ you just need to write Asparagus
 
 # Example #
-crate backyard
+crate backyard (binary)
+crate restaurant (library) -> cargo new restaurant --lib
